@@ -8,9 +8,11 @@ let thirdImage = document.querySelector('section img:last-child');
 
 let vote = 0;
 let voteCeil = 25; // maximum number of votes
+let uniqueImageCount = 6; // i don't understand this yet
 
 const state = { //holds current state of application
     prodArr: [],
+    indexArr: [], //keep track of image combinations
 }
 
 function product(name, source) {
@@ -25,15 +27,22 @@ function getRandomNumber() {
 }
 
 function renderProd() {
-    let prod1 = getRandomNumber();
-    let prod2 = getRandomNumber();
-    let prod3 = getRandomNumber();
+     let prod1 = getRandomNumber();
+     let prod2 = getRandomNumber();
+     let prod3 = getRandomNumber();
+ 
+     /*while (prod1 == prod2 || prod2 == prod3 || prod3 == prod1) {
+ 
+         prod1 = getRandomNumber();
+         prod2 = getRandomNumber();
+         prod3 = getRandomNumber();
+     }*/
 
-    while (prod1 == prod2 || prod2 == prod3 || prod3 == prod1) {
-
-        prod1 = getRandomNumber();
-        prod2 = getRandomNumber();
-        prod3 = getRandomNumber();
+    while (state.indexArr.length < uniqueImageCount) {
+        let randomNumber = getRandomNumber();
+        if (!state.indexArr.includes(randomNumber)) {
+            state.indexArr.push(randomNumber);
+        }
     }
 
     firstImage.src = state.prodArr[prod1].source;
@@ -65,25 +74,68 @@ function clickedOrNah(event) {
     }
     if (vote === voteCeil) {
         productContainer.removeEventListener('click', clickedOrNah);
-        results.addEventListener('click', renderResults);
-
-        results.className = 'votes-allowed';
+        productContainer.className = 'no-voting';
+        renderChart();
     } else {
         renderProd();
     }
 
 }
 
-function renderResults() {
-    let ul = document.querySelector('ul');
+function renderChart() {
+    let prodNames = [];
+    let prodVotes = [];
+    let prodViews = [];
+
     for (let i = 0; i < state.prodArr.length; i++) {
-        let li = document.createElement('li');
-        li.textContent = `${state.prodArr[i].name} was seen ${state.prodArr[i].seen}x and received ${state.prodArr[i].vote} votes`;
-        ul.append(li);
+        prodNames.push(state.prodArr[i].name);
+        prodVotes.push(state.prodArr[i].vote);
+        prodViews.push(state.prodArr[i].seen);
     }
 
-}
+    const data = {
+        labels: prodNames,
+        datasets: [{
+            label: "Votes",
+            data: prodVotes,
+            backgroundColor: [
+                'rgba(255, 165, 0, 0.2)'
+            ],
+            borderColor: [
+                'rgb(255,165,0)'
+            ],
+            borderWidth: 1
+        },
 
+        {
+            label: "Seen",
+            data: prodViews,
+            backgroundColor: [
+                'rgba(65,105,225, 0.2)'
+            ],
+            borderColor: [
+                'rgb(65,105,225)'
+            ],
+            borderWidth: 1
+        }]
+    };
+
+    const config = {
+        type: "bar",
+        data: data,
+        options: {
+            scales:{
+                y: {beginAtZero: true
+                }
+            }
+        },
+    };
+
+    let canvasChart = document.getElementById('myChart');
+    const myChart = new Chart(canvasChart, config);
+
+
+}
 
 let bag = new product('bag', 'img/bag.jpg');
 let banana = new product('banana', 'img/banana.jpg');
