@@ -31,12 +31,12 @@ function renderProd() {
      let prod2 = getRandomNumber();
      let prod3 = getRandomNumber();
  
-     /*while (prod1 == prod2 || prod2 == prod3 || prod3 == prod1) {
+     while (prod1 == prod2 || prod2 == prod3 || prod3 == prod1) {
  
          prod1 = getRandomNumber();
          prod2 = getRandomNumber();
          prod3 = getRandomNumber();
-     }*/
+     }
 
     while (state.indexArr.length < uniqueImageCount) {
         let randomNumber = getRandomNumber();
@@ -153,8 +153,11 @@ let scissors = new product('scissors', 'img/scissors.jpg');
 let shark = new product('shark', 'img/shark.jpg');
 let sweep = new product('sweep', 'img/sweep.png');
 let tauntaun = new product('tauntaun', 'img/tauntaun.jpg');
+let unicorn = new product('unicorn', 'img/unicorn.jpg');
+let waterCan = new product('water-can', 'img/water-can.jpg');
+let wineGlass = new product('wine-glass', 'img/wine-glass.jpg');
 
-state.prodArr.push(bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun);
+state.prodArr.push(bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, waterCan, wineGlass);
 
 renderProd();
 
