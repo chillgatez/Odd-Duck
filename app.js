@@ -8,7 +8,7 @@ let thirdImage = document.querySelector('section img:last-child');
 
 let vote = 0;
 let voteCeil = 25; // maximum number of votes
-let uniqueImageCount = 6; // i don't understand this yet
+let uniqueImageCount = 3; // 
 
 const state = { //holds current state of application
     prodArr: [],
@@ -27,16 +27,6 @@ function getRandomNumber() {
 }
 
 function renderProd() {
-     let prod1 = getRandomNumber();
-     let prod2 = getRandomNumber();
-     let prod3 = getRandomNumber();
- 
-     while (prod1 == prod2 || prod2 == prod3 || prod3 == prod1) {
- 
-         prod1 = getRandomNumber();
-         prod2 = getRandomNumber();
-         prod3 = getRandomNumber();
-     }
 
     while (state.indexArr.length < uniqueImageCount) {
         let randomNumber = getRandomNumber();
@@ -44,6 +34,12 @@ function renderProd() {
             state.indexArr.push(randomNumber);
         }
     }
+
+        //keeps looping until state.indexArr has uniqueImageCount number of unique indices. To ensure duplicates are not shown.
+
+    let prod1 = state.indexArr.shift();
+    let prod2 = state.indexArr.shift();
+    let prod3 = state.indexArr.shift();
 
     firstImage.src = state.prodArr[prod1].source;
     secondImage.src = state.prodArr[prod2].source;
@@ -79,6 +75,8 @@ function clickedOrNah(event) {
     } else {
         renderProd();
     }
+
+    localStorage.setItem('state.prodArr', JSON.stringify(state.prodArr));
 
 }
 
@@ -124,8 +122,9 @@ function renderChart() {
         type: "bar",
         data: data,
         options: {
-            scales:{
-                y: {beginAtZero: true
+            scales: {
+                y: {
+                    beginAtZero: true
                 }
             }
         },
@@ -157,7 +156,14 @@ let unicorn = new product('unicorn', 'img/unicorn.jpg');
 let waterCan = new product('water-can', 'img/water-can.jpg');
 let wineGlass = new product('wine-glass', 'img/wine-glass.jpg');
 
-state.prodArr.push(bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, waterCan, wineGlass);
+
+
+if(localStorage['state.prodArr']){
+    state.prodArr = JSON.parse(localStorage.getItem('state.prodArr'))
+} else {
+   state.prodArr.push(bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, waterCan, wineGlass); 
+}
+
 
 renderProd();
 
