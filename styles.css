@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+header {
+    background-color: #ffffff;
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 85px;
+}
+
+header img {
+    height: 80px;
+    width: auto;
+}
+
+body {
+    display: block;
+    font-family: cursive;
+    background-color: #ECD573;
+    color: whitesmoke;
+    margin-top: 95px;
+    margin-left: 50px;
+    margin-right: 50px;
+
+}
+
+#productContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: row;
+}
+
+#productContainer img{
+    width: auto;
+    max-height: 20rem;
+    border: 5px solid #8A7C44;
+    margin-right: 10px;
+    padding: 2px;
+}
+
+h1, h2, h3 {
+    font-family: 'Comic Neue', cursive;
+    color: #7C6736;
+}

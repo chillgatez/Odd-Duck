@@ -8,7 +8,7 @@ let thirdImage = document.querySelector('section img:last-child');
 
 let vote = 0;
 let voteCeil = 25; // maximum number of votes
-let uniqueImageCount = 3; // 
+let uniqueImageCount = 6; //
 
 const state = { //holds current state of application
     prodArr: [],
@@ -34,8 +34,7 @@ function renderProd() {
             state.indexArr.push(randomNumber);
         }
     }
-
-        //keeps looping until state.indexArr has uniqueImageCount number of unique indices. To ensure duplicates are not shown.
+    //keeps looping until state.indexArr has uniqueImageCount number of unique indices. To ensure duplicates are not shown.
 
     let prod1 = state.indexArr.shift();
     let prod2 = state.indexArr.shift();
@@ -97,10 +96,10 @@ function renderChart() {
             label: "Votes",
             data: prodVotes,
             backgroundColor: [
-                'rgba(255, 165, 0, 0.2)'
+                'rgba(50, 49, 27, 0.2)'
             ],
             borderColor: [
-                'rgb(255,165,0)'
+                'rgb(50, 49, 27)'
             ],
             borderWidth: 1
         },
@@ -109,10 +108,10 @@ function renderChart() {
             label: "Seen",
             data: prodViews,
             backgroundColor: [
-                'rgba(65,105,225, 0.2)'
+                'rgba(162, 129, 128, 0.2)'
             ],
             borderColor: [
-                'rgb(65,105,225)'
+                'rgb(162, 129, 128)'
             ],
             borderWidth: 1
         }]
@@ -158,10 +157,10 @@ let wineGlass = new product('wine-glass', 'img/wine-glass.jpg');
 
 
 
-if(localStorage['state.prodArr']){
+if (localStorage['state.prodArr']) {
     state.prodArr = JSON.parse(localStorage.getItem('state.prodArr'))
 } else {
-   state.prodArr.push(bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, waterCan, wineGlass); 
+    state.prodArr.push(bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, waterCan, wineGlass);
 }
 
 
